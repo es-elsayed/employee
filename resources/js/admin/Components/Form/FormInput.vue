@@ -14,7 +14,7 @@ const props = defineProps({
     },
     label: {
         type: String,
-        required: true,
+        default: '',
     },
     // lable Class
     lClass: {
@@ -46,9 +46,9 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    autocompleteValue: {
+    autocomplete: {
         type: String,
-        default: '',
+        default: 'off',
     },
     errorMessage: {
         type: String,
@@ -68,10 +68,10 @@ const value = computed({
 
 <template>
     <div :class="gClass">
-        <InputLabel :for="id" :value="label" :class="lClass" />
+        <InputLabel v-if="label" :for="id" :value="label" :class="lClass" />
 
         <TextInput :id="id" v-model="value" :type="type" :class="'block w-full mt-1 ' + iClass" :required="required"
-            :autofocus="autofocus" :autocomplete="autocompleteValue" />
+            :autofocus="autofocus" :autocomplete="autocomplete" />
 
         <InputError v-if="errorMessage" class="mt-2" :message="errorMessage" />
     </div>

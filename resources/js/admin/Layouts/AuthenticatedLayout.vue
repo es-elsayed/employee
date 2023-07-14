@@ -6,12 +6,15 @@ import DropdownLink from '@/admin/Components/DropdownLink.vue';
 import NavLink from '@/admin/Components/NavLink.vue';
 import ResponsiveNavLink from '@/admin/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import Alert from '@/admin/Components/Alert.vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
     <div>
+        <Alert/>
+
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
