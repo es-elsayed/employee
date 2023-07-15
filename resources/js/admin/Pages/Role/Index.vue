@@ -39,7 +39,7 @@ defineProps({
                         <Td>{{ item.name }}</Td>
                         <Td>{{ item.created_at }}</Td>
                         <Td>
-                            <Actions />
+                            <Actions :edit-link="route('admin.roles.edit',  item.id )" />
                         </Td>
                     </template>
                 </Table>

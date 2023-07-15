@@ -42,4 +42,16 @@ class RoleController extends Controller
         Role::create($request->validated());
         return redirect()->route('admin.roles.index')->with('success', 'Role Created Successfully');
     }
+    public function edit(Role $role)
+    {
+        return Inertia::render('Role/Create', [
+            'role' => new RoleResource($role),
+        ]);
+    }
+
+    public function update(RoleRequest $request, Role $role)
+    {
+        $role->update($request->validated());
+        return redirect()->route('admin.roles.index')->with('success', 'Role Updated Successfully');
+    }
 }

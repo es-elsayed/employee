@@ -16,6 +16,10 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
 });
 let classes = 'inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest uppercase transition duration-150 ease-in-out border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2'
 if (props.color === 'danger') {
@@ -30,7 +34,7 @@ if (props.color === 'danger') {
     <Link v-if="href" :href="href" :class="classes">
     <slot />
     </Link>
-    <button v-else :class="classes" :type="type">
+    <button v-else :class="classes" :type="type" :disabled="disabled">
         <slot />
     </button>
 </template>
