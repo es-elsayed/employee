@@ -50,35 +50,30 @@ const closeModal = () => {
 
         <Button @click="confirmUserDeletion" color="danger">Delete Account</Button>
 
-        <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">
-                    Are you sure you want to delete your account?
-                </h2>
+        <Modal :show="confirmingUserDeletion" @close="closeModal" title="Are you sure you want to delete your account?">
 
-                <p class="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data will be permanently deleted. Please
-                    enter your password to confirm you would like to permanently delete your account.
-                </p>
+            <template #description>
+                Once your account is deleted, all of its resources and data will be permanently deleted. Please
+                enter your password to confirm you would like to permanently delete your account.
+            </template>
 
-                <div class="mt-6">
-                    <InputLabel for="password" value="Password" class="sr-only" />
+            <div class="mt-6">
+                <InputLabel for="password" value="Password" class="sr-only" />
 
-                    <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
-                        class="block w-3/4 mt-1" placeholder="Password" @keyup.enter="deleteUser" />
+                <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
+                    class="block w-3/4 mt-1" placeholder="Password" @keyup.enter="deleteUser" />
 
-                    <InputError :message="form.errors.password" class="mt-2" />
-                </div>
-
-                <div class="flex justify-end mt-6">
-                    <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
-
-                    <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing" @click="deleteUser">
-                        Delete Account
-                    </Button>
-                </div>
+                <InputError :message="form.errors.password" class="mt-2" />
             </div>
+
+            <template #footer>
+                <Button color="secondary" @click="closeModal"> Cancel </Button>
+
+                <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                    @click="deleteUser">
+                    Delete Account
+                </Button>
+            </template>
         </Modal>
     </section>
 </template>
