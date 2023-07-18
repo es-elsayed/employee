@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { ref, watch, onMounted } from 'vue';
+import { Head, useForm, router } from '@inertiajs/vue3';
+// import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from '@/admin/Layouts/AuthenticatedLayout.vue';
 import Container from '@/admin/Components/Container.vue';
 import Modal from '@/admin/Components/Modal.vue';
@@ -9,8 +10,9 @@ import Table from '@/admin/Components/Table/Table.vue';
 import Actions from '@/admin/Components/Table/Actions.vue';
 import Button from '@/admin/Components/Buttons/Button.vue';
 import Td from '@/admin/Components/Table/Td.vue';
+import FormInput from '@/admin/Components/Form/FormInput.vue';
 
-defineProps({
+const props = defineProps({
     roles: {
         type: Object,
         default: () => ({})
@@ -19,19 +21,26 @@ defineProps({
         type: Object,
         default: () => ({})
     },
+    filters: {
+        type: Object,
+        default: () => ({})
+    },
 
 })
 
 const confirmingModelDeletion = ref(false);
-
 const itemToDelete = ref({});
+const form = useForm({});
+const fetchItemHandler = ref(null);
+const filters = ref({
+    name: ""
+});
+
 const confirmModelDeletion = (item) => {
     confirmingModelDeletion.value = true;
     itemToDelete.value = item;
 
 };
-
-const form = useForm({});
 
 const closeModal = () => {
     confirmingModelDeletion.value = false;
@@ -45,6 +54,26 @@ const deleteModel = () => {
         onFinish: () => form.reset(),
     });
 };
+
+function fetchItems() {
+    router.get(route('admin.roles.index'), filters.value, {
+        preserveState: true,
+        preserveScroll: true
+    })
+};
+
+watch(filters, () => {
+    clearTimeout(fetchItemHandler.value);
+    fetchItemHandler.value = setTimeout(() => {
+        fetchItems();
+    }, 500);
+}, {
+    deep: true
+});
+
+onMounted(() => {
+    filters.value = props.filters;
+})
 </script>
 
 <template>
@@ -56,6 +85,18 @@ const deleteModel = () => {
         </template>
 
         <Container>
+            <Card class="mb-4">
+                <template #header>
+                    Filter
+                </template>
+                <form class="grid grid-cols-4 gap-8">
+                    <div>
+
+                        <FormInput v-model="filters.name" id="name" label="Name" />
+                    </div>
+                </form>
+            </Card>
+
             <Button color="primary" :href="route('admin.roles.create')">Create</Button>
 
             <Card class="mt-4">
@@ -84,6 +125,9 @@ const deleteModel = () => {
                                     </Button>
                                 </template>
                             </Modal>
+                        </Td>
+                        <Td v-if="items.data.length === 0">
+                            No Available Data
                         </Td>
                     </template>
                 </Table>
