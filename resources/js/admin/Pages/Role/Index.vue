@@ -58,7 +58,8 @@ const deleteModel = () => {
 function fetchItems() {
     router.get(route('admin.roles.index'), filters.value, {
         preserveState: true,
-        preserveScroll: true
+        preserveScroll: true,
+        replace: true
     })
 };
 
@@ -72,7 +73,7 @@ watch(filters, () => {
 });
 
 onMounted(() => {
-    filters.value = props.filters;
+    filters.value = props.filters ?? "";
 })
 </script>
 
@@ -125,9 +126,6 @@ onMounted(() => {
                                     </Button>
                                 </template>
                             </Modal>
-                        </Td>
-                        <Td v-if="items.data.length === 0">
-                            No Available Data
                         </Td>
                     </template>
                 </Table>
