@@ -11,78 +11,56 @@ import Actions from '@/admin/Components/Table/Actions.vue';
 import Button from '@/admin/Components/Buttons/Button.vue';
 import Td from '@/admin/Components/Table/Td.vue';
 import FormInput from '@/admin/Components/Form/FormInput.vue';
+import useDeleteItem from '@/admin/Composable/useDeleteItem.js';
+import useFilter from '@/admin/Composable/useFilter.js';
 
 const props = defineProps({
-    roles: {
+    title: {
+        type: String,
+        required: true,
+    },
+    items: {
         type: Object,
-        default: () => ({})
+        default: () => ({}),
     },
     headers: {
-        type: Object,
-        default: () => ({})
+        type: Array,
+        default: () => [],
     },
     filters: {
         type: Object,
-        default: () => ({})
+        default: () => ({}),
     },
-
+    routeResourceName: {
+        type: String,
+        required: true,
+    },
 })
 
-const confirmingModelDeletion = ref(false);
-const itemToDelete = ref({});
-const form = useForm({});
-const fetchItemHandler = ref(null);
-const filters = ref({
-    name: ""
+const {
+    deleteModal,
+    itemToDelete,
+    form,
+    showDeleteModal,
+    closeModal,
+    handleDeleteItem,
+} = useDeleteItem({ routeResourceName: props.routeResourceName, });
+
+const { filters } = useFilter({
+    filters: props.filters,
+    routeResourceName: props.routeResourceName,
 });
 
-const confirmModelDeletion = (item) => {
-    confirmingModelDeletion.value = true;
-    itemToDelete.value = item;
-
-};
-
-const closeModal = () => {
-    confirmingModelDeletion.value = false;
-    form.reset();
-};
-
-const deleteModel = () => {
-    form.delete(route('admin.roles.destroy', itemToDelete.value.id), {
-        preserveScroll: true,
-        onSuccess: () => closeModal(),
-        onFinish: () => form.reset(),
-    });
-};
-
-function fetchItems() {
-    router.get(route('admin.roles.index'), filters.value, {
-        preserveState: true,
-        preserveScroll: true,
-        replace: true
-    })
-};
-
-watch(filters, () => {
-    clearTimeout(fetchItemHandler.value);
-    fetchItemHandler.value = setTimeout(() => {
-        fetchItems();
-    }, 500);
-}, {
-    deep: true
-});
-
-onMounted(() => {
-    filters.value = props.filters ?? "";
-})
 </script>
 
 <template>
-    <Head title="Role" />
+    <Head :title="title" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">Roles</h2>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                {{ title }}
+            </h2>
         </template>
 
         <Container>
@@ -98,37 +76,35 @@ onMounted(() => {
                 </form>
             </Card>
 
-            <Button color="primary" :href="route('admin.roles.create')">Create</Button>
+            <Button color="primary" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
 
             <Card class="mt-4">
-                <Table :headers="headers" :items="roles">
+                <Table :headers="headers" :items="items">
                     <template v-slot="{ item }">
                         <Td>{{ item.name }}</Td>
                         <Td>{{ item.created_at }}</Td>
                         <Td>
-                            <Actions :edit-link="route('admin.roles.edit', item.id)"
-                                @deleteClicked="confirmModelDeletion(item)" />
-
-                            <Modal :show="confirmingModelDeletion" @close="closeModal"
-                                :title="`Delete Role: (${itemToDelete.name})`">
-
-                                <template #description>
-                                    Once you are delete a role, you un-able to restore it again.
-                                </template>
-
-
-                                <template #footer>
-                                    <Button color="secondary" @click="closeModal"> Cancel </Button>
-
-                                    <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }"
-                                        :disabled="form.processing" @click="deleteModel">
-                                        Delete Role
-                                    </Button>
-                                </template>
-                            </Modal>
+                            <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)"
+                                @deleteClicked="showDeleteModal(item)" />
                         </Td>
                     </template>
                 </Table>
+
+                <Modal :show="deleteModal" @close="closeModal" :title="`Delete Role: (${itemToDelete.name})`">
+
+                    <template #description>
+                        Once you are delete a role, you un-able to restore it again.
+                    </template>
+
+                    <template #footer>
+                        <Button color="secondary" @click="closeModal"> Cancel </Button>
+
+                        <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing" @click="handleDeleteItem">
+                            Delete Role
+                        </Button>
+                    </template>
+                </Modal>
             </Card>
         </Container>
     </AuthenticatedLayout>

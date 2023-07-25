@@ -12,6 +12,8 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    private string $routeResourceName = 'roles';
+
     public function index(Request $request)
     {
         $role = Role::query()
@@ -20,7 +22,8 @@ class RoleController extends Controller
             ->latest('id')
             ->paginate(10);
         return Inertia::render('Role/Index', [
-            'roles' => RoleResource::collection($role),
+            'title' => 'Roles',
+            'items' => RoleResource::collection($role),
             'headers' => [
                 [
                     'label' => 'Name',
@@ -35,6 +38,7 @@ class RoleController extends Controller
                     'name' => 'actions',
                 ],
             ],
+            'routeResourceName' => $this->routeResourceName,
             'filters' => (object) $request->all(),
         ]);
 
@@ -66,6 +70,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('admin.roles.index')->with('success', 'Role Deleted Successfully');
+        return redirect()->route('admin.roles.index')->with('error', 'Role Deleted Successfully');
     }
 }
