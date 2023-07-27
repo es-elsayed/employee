@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'verified'], function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
 });
