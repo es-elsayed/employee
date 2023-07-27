@@ -8,31 +8,39 @@ import FormInput from '@/admin/Components/Form/FormInput.vue';
 
 
 const props = defineProps({
-    role: {
+    title: {
+        type: String,
+    },
+    action: {
+        type: String,
+        default: '',
+        validator: (value) => {
+            return ['create', 'edit'].includes(value);
+        },
+    },
+    item: {
         type: Object,
         default: ({})
     },
-})
-const form = useForm({
-    name: '',
-    guard_name: '',
+    routeResourceName: {
+        type: String,
+        required: true,
+    }
 });
-let title = "";
 
-if (Object.keys(props.role).length === 0) {
-    title = "Add Role";
-} else {
-    title = "Edit Role"
-    form.name = props.role.name
-    form.guard_name = props.role.guard_name
-}
+const form = useForm({
+    name: props.item.name ?? "",
+    guard_name: props.item.guard_name ?? "",
+});
+
 
 const submit = () => {
-    Object.keys(props.role).length === 0 ?
-        form.post(route('admin.roles.store')) :
-        form.put(route('admin.roles.update', props.role.id));
+    props.action  === 'create' ?
+        form.post(route(`admin.${props.routeResourceName}.store`)) :
+        form.put(route(`admin.${props.routeResourceName}.update`, props.item.id));
 
 };
+
 </script>
 
 <template>

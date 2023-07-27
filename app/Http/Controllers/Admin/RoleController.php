@@ -46,7 +46,10 @@ class RoleController extends Controller
 
     public function create()
     {
-        return Inertia::render('Role/Create');
+        return Inertia::render('Role/Create',[
+            'action' =>'create',
+            'routeResourceName' => $this->routeResourceName,
+        ]);
     }
 
     public function store(RoleRequest $request)
@@ -57,7 +60,9 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         return Inertia::render('Role/Create', [
-            'role' => new RoleResource($role),
+            'item' => new RoleResource($role),
+            'action' =>'create',
+            'routeResourceName' => $this->routeResourceName,
         ]);
     }
 

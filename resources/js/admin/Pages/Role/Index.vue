@@ -90,10 +90,10 @@ const { filters } = useFilter({
                     </template>
                 </Table>
 
-                <Modal :show="deleteModal" @close="closeModal" :title="`Delete Role: (${itemToDelete.name})`">
+                <Modal :show="deleteModal" @close="closeModal" :title="`Delete: (${itemToDelete.name})`">
 
                     <template #description>
-                        Once you are delete a role, you un-able to restore it again.
+                        Once you are delete , you un-able to restore it again.
                     </template>
 
                     <template #footer>
@@ -101,7 +101,7 @@ const { filters } = useFilter({
 
                         <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing" @click="handleDeleteItem">
-                            Delete Role
+                            Delete
                         </Button>
                     </template>
                 </Modal>

@@ -27,10 +27,6 @@ export default function (params) {
         deep: true
     });
 
-    onMounted(() => {
-        filters.value = defaultFilters;
-    })
-
     return {
         filters
     }
