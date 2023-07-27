@@ -10,7 +10,7 @@ import Table from '@/admin/Components/Table/Table.vue';
 import Actions from '@/admin/Components/Table/Actions.vue';
 import Button from '@/admin/Components/Buttons/Button.vue';
 import Td from '@/admin/Components/Table/Td.vue';
-import FormInput from '@/admin/Components/Form/FormInput.vue';
+import BasicFilter from '@/admin/Components/BasicFilter.vue';
 import useDeleteItem from '@/admin/Composable/useDeleteItem.js';
 import useFilter from '@/admin/Composable/useFilter.js';
 
@@ -56,29 +56,14 @@ const { filters } = useFilter({
 <template>
     <Head :title="title" />
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ title }}
-            </h2>
+    <AuthenticatedLayout :title="title">
+        <template #actions>
+            <Button color="primary" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
         </template>
 
         <Container>
-            <Card class="mb-4">
-                <template #header>
-                    Filter
-                </template>
-                <form class="grid grid-cols-4 gap-8">
-                    <div>
-
-                        <FormInput v-model="filters.name" id="name" label="Name" />
-                    </div>
-                </form>
-            </Card>
-
-            <Button color="primary" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
-
             <Card class="mt-4">
+                <BasicFilter v-model="filters" />
                 <Table :headers="headers" :items="items">
                     <template v-slot="{ item }">
                         <Td>{{ item.name }}</Td>

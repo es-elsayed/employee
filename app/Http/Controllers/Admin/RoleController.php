@@ -18,7 +18,7 @@ class RoleController extends Controller
     {
         $role = Role::query()
             ->select(['id', 'name', 'guard_name', 'created_at'])
-            ->when($request->name, fn(Builder $builder, $name) => $builder->where('name', 'like', "%{$name}%"))
+            ->when($request->search, fn(Builder $builder, $search) => $builder->where('name', 'like', "%{$search}%"))
             ->latest('id')
             ->paginate(10);
         return Inertia::render('Role/Index', [
