@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import GuestLayout from '@/admin/Layouts/GuestLayout.vue';
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -34,7 +34,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 
         <form @submit.prevent="submit">
             <div class="flex items-center justify-between mt-4">
-                <Button color="primary" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Button color="black" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Resend Verification Email
                 </Button>
 

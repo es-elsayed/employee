@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 import Container from '@/admin/Components/Container.vue';
 import Card from '@/admin/Components/Card/Card.vue';
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import TextInput from '@/admin/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 
@@ -69,8 +69,8 @@ const changePermission = (permission, $action) => {
                     }">
                     <div :class="{ 'text-green-700 font-bold': roleHasPermission(permission) }">{{ permission.name }}</div>
                     <Button v-if="roleHasPermission(permission)" @click="changePermission(permission, 'detach')"
-                        color="danger">Detach</Button>
-                    <Button v-else color="primary" @click="changePermission(permission, 'attach')">Attach</Button>
+                        color="red">Detach</Button>
+                    <Button v-else color="black" @click="changePermission(permission, 'attach')">Attach</Button>
                 </li>
             </ul>
         </Card>

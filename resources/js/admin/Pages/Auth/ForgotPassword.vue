@@ -2,7 +2,7 @@
 import GuestLayout from '@/admin/Layouts/GuestLayout.vue';
 import InputError from '@/admin/Components/InputError.vue';
 import InputLabel from '@/admin/Components/InputLabel.vue';
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import TextInput from '@/admin/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
@@ -52,7 +52,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Button color="primary" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Button color="black" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Email Password Reset Link
                 </Button>
             </div>

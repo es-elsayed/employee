@@ -8,7 +8,7 @@ import Modal from '@/admin/Components/Modal.vue';
 import Card from '@/admin/Components/Card/Card.vue';
 import Table from '@/admin/Components/Table/Table.vue';
 import Actions from '@/admin/Components/Table/Actions.vue';
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import Td from '@/admin/Components/Table/Td.vue';
 import BasicFilter from '@/admin/Components/BasicFilter.vue';
 import useDeleteItem from '@/admin/Composable/useDeleteItem.js';
@@ -58,7 +58,7 @@ const { filters } = useFilter({
 
     <AuthenticatedLayout :title="title">
         <template #actions>
-            <Button color="primary" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
+            <Button color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
         </template>
 
         <Container>
@@ -82,9 +82,9 @@ const { filters } = useFilter({
                     </template>
 
                     <template #footer>
-                        <Button color="secondary" @click="closeModal"> Cancel </Button>
+                        <Button color="white" @click="closeModal"> Cancel </Button>
 
-                        <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }"
+                        <Button color="red" class="ml-3" :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing" @click="handleDeleteItem">
                             Delete
                         </Button>

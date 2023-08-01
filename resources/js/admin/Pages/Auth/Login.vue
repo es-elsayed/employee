@@ -3,7 +3,7 @@ import Checkbox from '@/admin/Components/Checkbox.vue';
 import GuestLayout from '@/admin/Layouts/GuestLayout.vue';
 import InputError from '@/admin/Components/InputError.vue';
 import InputLabel from '@/admin/Components/InputLabel.vue';
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import TextInput from '@/admin/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
@@ -85,7 +85,7 @@ const submit = () => {
                     Forgot your password?
                 </Link>
 
-                <Button color="primary" type="submit" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Button color="black" type="submit" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </Button>
             </div>

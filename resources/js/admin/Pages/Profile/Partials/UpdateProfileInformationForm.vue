@@ -1,7 +1,7 @@
 <script setup>
 import InputError from '@/admin/Components/InputError.vue';
 import InputLabel from '@/admin/Components/InputLabel.vue';
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import TextInput from '@/admin/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
@@ -86,7 +86,7 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <Button color="primary" type="submit" :disabled="form.processing">Save</Button>
+                <Button color="black" type="submit" :disabled="form.processing">Save</Button>
 
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>

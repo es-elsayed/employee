@@ -1,5 +1,5 @@
 <script setup>
-import Button from '@/admin/Components/Buttons/Button.vue';
+import Button from '@/admin/Components/Base/Button.vue';
 import InputError from '@/admin/Components/InputError.vue';
 import InputLabel from '@/admin/Components/InputLabel.vue';
 import Modal from '@/admin/Components/Modal.vue';
@@ -48,7 +48,7 @@ const closeModal = () => {
             </p>
         </header>
 
-        <Button @click="confirmUserDeletion" color="danger">Delete Account</Button>
+        <Button @click="confirmUserDeletion" color="red">Delete Account</Button>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal" title="Are you sure you want to delete your account?">
 
@@ -67,9 +67,9 @@ const closeModal = () => {
             </div>
 
             <template #footer>
-                <Button color="secondary" @click="closeModal"> Cancel </Button>
+                <Button color="white" @click="closeModal"> Cancel </Button>
 
-                <Button color="danger" class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                <Button color="red" class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     @click="deleteUser">
                     Delete Account
                 </Button>
