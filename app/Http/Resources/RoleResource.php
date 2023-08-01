@@ -19,6 +19,7 @@ class RoleResource extends JsonResource
             'name' => $this->name,
             'guard_name' => $this->guard_name,
             'created_at' => $this->created_at?->toDayDateTimeString(),
+            'permissions' => PermissionResource::collection($this->whenLoaded('permissions')),
         ];
     }
 }

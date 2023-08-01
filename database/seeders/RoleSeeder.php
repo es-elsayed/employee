@@ -12,10 +12,10 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach ($this->roles() as $key => $value) {
+        foreach ($this->roles() as $role) {
             Role::create([
-                'guard_name' => $key,
-                'name' => $value,
+                'guard_name' => "web",
+                'name' => $role,
             ]);
         }
     }
@@ -23,11 +23,7 @@ class RoleSeeder extends Seeder
     private function roles(): array
     {
 
-        return [
-            'super_admin' => 'Super Admin',
-            'user' => 'User',
-            'client' => 'Client',
-            'content_writer' => 'Content Writer',
-        ];
+        return ['super-admin', 'editor', 'user', 'guest'];
+
     }
 }

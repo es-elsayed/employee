@@ -59,9 +59,6 @@ const submit = () => {
 
                     <FormInput v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
 
-                    <FormInput v-model="form.guard_name" id="guard_name" label="Guard Name"
-                        :error-message="form.errors.guard_name" />
-
                     <Button color="primary" type="submit" :disabled="form.processing">
                         {{ form.processing ? 'Saving...' : 'Save' }}
                     </Button>

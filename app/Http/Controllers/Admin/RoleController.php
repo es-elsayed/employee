@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleRequest;
+use App\Http\Resources\PermissionResource;
 use App\Http\Resources\RoleResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -59,10 +61,13 @@ class RoleController extends Controller
     }
     public function edit(Role $role)
     {
+        $role->load('permissions:permissions.id,permissions.name');
+
         return Inertia::render('Role/Create', [
             'item' => new RoleResource($role),
-            'action' =>'create',
+            'action' =>'edit',
             'routeResourceName' => $this->routeResourceName,
+            'permissions' => PermissionResource::collection(Permission::get(['id','name'])),
         ]);
     }
 

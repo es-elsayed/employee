@@ -24,7 +24,6 @@ class PermissionRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('permissions', 'name')->ignore($this->role)],
-            'guard_name' => ['nullable', 'string', 'max:64'],
         ];
     }
 }

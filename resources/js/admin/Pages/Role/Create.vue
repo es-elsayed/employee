@@ -5,6 +5,7 @@ import Container from '@/admin/Components/Container.vue';
 import Button from '@/admin/Components/Buttons/Button.vue';
 import Card from '@/admin/Components/Card/Card.vue';
 import FormInput from '@/admin/Components/Form/FormInput.vue';
+import Permissions from './Permissions.vue';
 
 
 const props = defineProps({
@@ -25,6 +26,9 @@ const props = defineProps({
     routeResourceName: {
         type: String,
         required: true,
+    },
+    permissions: {
+        type: Array,
     }
 });
 
@@ -59,9 +63,6 @@ const submit = () => {
 
                     <FormInput v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
 
-                    <FormInput v-model="form.guard_name" id="guard_name" label="Guard Name"
-                        :error-message="form.errors.guard_name" />
-
                     <Button color="primary" type="submit" :disabled="form.processing">
                         {{ form.processing ? 'Saving...' : 'Save' }}
                     </Button>
@@ -69,5 +70,6 @@ const submit = () => {
                 </form>
             </Card>
         </Container>
+        <Permissions  v-if="action =='edit'" :role="item" :permissions="permissions"  />
     </AuthenticatedLayout>
 </template>
