@@ -48,6 +48,10 @@ const changePermission = (permission, $action) => {
     );
 };
 
+const transformText = (text) => {
+    return text.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
+}
+
 </script>
 
 <template>
@@ -60,17 +64,18 @@ const changePermission = (permission, $action) => {
             <div class="w-1/4">
                 <TextInput type="text" class="block w-full mt-1" v-model="search" placeholder="Search" />
             </div>
-            <!-- <BasicFilter v-model="search"/> -->
 
             <ul class="mt-4">
                 <li v-for="(permission, index) in filteredPermissions" :key="permission.id"
                     class="flex items-center justify-between px-2 py-2 hover:bg-gray-100" :class="{
                         'border-b': index < (permissions.length - 1),
                     }">
-                    <div :class="{ 'text-green-700 font-bold': roleHasPermission(permission) }">{{ permission.name }}</div>
+                    <div :class="{ 'text-green-700 font-bold': roleHasPermission(permission) }">
+                        {{ transformText(permission.name) }}
+                    </div>
                     <Button v-if="roleHasPermission(permission)" @click="changePermission(permission, 'detach')"
                         color="red">Detach</Button>
-                    <Button v-else color="black" @click="changePermission(permission, 'attach')">Attach</Button>
+                    <Button v-else color="green" @click="changePermission(permission, 'attach')">Attach</Button>
                 </li>
             </ul>
         </Card>

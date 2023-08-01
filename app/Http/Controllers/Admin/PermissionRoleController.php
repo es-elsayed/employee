@@ -10,16 +10,12 @@ class PermissionRoleController extends Controller
 {
     public function __invoke(Request $request, Permission $permission)
     {
-        $action = $request->action;
-        $roleId = $request->roleId;
-        if ($action == 'attach') {
-            $permission->assignRole($roleId);
+        if ($request->action == 'attach') {
+            $permission->assignRole($request->roleId);
         } else {
-            $permission->removeRole($roleId);
+            $permission->removeRole($request->roleId);
         }
-
-        return redirect()->back()->with('success', "Permission $action ed successfully.");
-
+        return redirect()->back()->with('success', 'Permission ' . $request->action . 'ed successfully.');
     }
 
 }
