@@ -34,6 +34,7 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    can: Object
 })
 
 const {
@@ -55,17 +56,17 @@ const { filters } = useFilter({
 <template>
     <Head :title="title" />
 
-    <AuthenticatedLayout  :title="title">
+    <AuthenticatedLayout :title="title">
 
         <template #actions>
-            <Button color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
+            <Button v-if="can.create" color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
         </template>
 
         <Container>
 
 
             <Card class="mt-4">
-                <BasicFilter v-model="filters"/>
+                <BasicFilter v-model="filters" />
 
                 <Table :headers="headers" :items="items">
                     <template v-slot="{ item }">
@@ -73,6 +74,7 @@ const { filters } = useFilter({
                         <Td>{{ item.created_at }}</Td>
                         <Td>
                             <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)"
+                                :show-edit="item.can.update" :show-delete="item.can.delete"
                                 @deleteClicked="showDeleteModal(item)" />
                         </Td>
                     </template>
