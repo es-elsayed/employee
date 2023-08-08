@@ -68,10 +68,11 @@ const { filters } = useFilter({
                 <BasicFilter v-model="filters" />
                 <Table :headers="headers" :items="items">
                     <template v-slot="{ item }">
-                        <Td>{{ item.name }}</Td>
-                        <Td>{{ item.created_at }}</Td>
-                        <Td>
-                            <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)"
+                        <Td v-for="header in headers">
+                            <div v-if="header.data !== 'actions'">
+                                {{ item[header.data] }}
+                            </div>
+                            <Actions v-else :edit-link="route(`admin.${routeResourceName}.edit`, item.id)"
                                 :show-edit="item.can.update" :show-delete="item.can.delete"
                                 @deleteClicked="showDeleteModal(item)" />
                         </Td>

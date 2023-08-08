@@ -27,7 +27,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $role = Role::query()
-            ->select(['id', 'name', 'guard_name', 'created_at'])
+            ->select(['id', 'name', 'created_at'])
             ->when($request->search, fn(Builder $builder, $search) => $builder->where('name', 'like', "%{$search}%"))
             ->latest('id')
             ->paginate(10);
@@ -37,15 +37,15 @@ class RoleController extends Controller
             'headers' => [
                 [
                     'label' => 'Name',
-                    'name' => 'name',
+                    'data' => 'name',
                 ],
                 [
                     'label' => 'Created At',
-                    'name' => 'created_at',
+                    'data' => 'created_at',
                 ],
                 [
                     'label' => 'Actions',
-                    'name' => 'actions',
+                    'data' => 'actions',
                 ],
             ],
             'routeResourceName' => $this->routeResourceName,

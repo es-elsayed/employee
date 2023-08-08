@@ -34,7 +34,6 @@ const props = defineProps({
 
 const form = useForm({
     name: props.item.name ?? "",
-    guard_name: props.item.guard_name ?? "",
 });
 
 
