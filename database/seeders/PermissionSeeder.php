@@ -22,6 +22,11 @@ class PermissionSeeder extends Seeder
             'roles-read',
             'roles-update',
             'roles-delete',
+
+            'users-create',
+            'users-read',
+            'users-update',
+            'users-delete',
         ];
 
         foreach ($permissions as $permission) {

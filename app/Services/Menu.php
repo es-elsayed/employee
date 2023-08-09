@@ -24,12 +24,12 @@ class Menu
                 'isActive' => request()->routeIs('admin.roles.*'),
                 'isVisible' => request()->user()?->can('roles-read'),
             ],
-            // [
-            //     'label' => 'Users',
-            //     'url' => route('admin.users.index'),
-            //     'isActive' => request()->routeIs('admin.users.*'),
-            //     'isVisible' => request()->user()?->can('users-read'),
-            // ],
+            [
+                'label' => 'Users',
+                'url' => route('admin.users.index'),
+                'isActive' => request()->routeIs('admin.users.*'),
+                'isVisible' => request()->user()?->can('users-read'),
+            ],
             // [
             //     'label' => 'Categories',
             //     'url' => route('admin.categories.index'),
