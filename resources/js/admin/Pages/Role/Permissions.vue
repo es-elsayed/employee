@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import Container from '@/admin/Components/Container.vue';
 import Card from '@/admin/Components/Card/Card.vue';
 import Button from '@/admin/Components/Base/Button.vue';
-import TextInput from '@/admin/Components/TextInput.vue';
+import Input from '@/admin/Components/Form/Input.vue';
 import { useForm } from '@inertiajs/vue3';
 
 
@@ -62,7 +62,7 @@ const transformText = (text) => {
             </template>
 
             <div class="w-1/4">
-                <TextInput type="text" class="block w-full mt-1" v-model="search" placeholder="Search" />
+                <Input type="text" class="block w-full mt-1" v-model="search" placeholder="Search" />
             </div>
 
             <ul class="mt-4">

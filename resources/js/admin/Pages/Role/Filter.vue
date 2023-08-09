@@ -1,6 +1,6 @@
 <script setup>
 import FilterCard from '@/admin/Components/Card/FilterCard.vue';
-import FormInput from '@/admin/Components/Form/FormInput.vue';
+import InputGroup from '@/admin/Components/Form/InputGroup.vue';
 import { ref, watch } from "vue";
 
 
@@ -33,7 +33,7 @@ watch(
         </template>
         <form class="grid grid-cols-4 gap-8">
             <div>
-                <FormInput v-model="filters.name" id="name" label="Name" />
+                <InputGroup v-model="filters.name" id="name" label="Name" />
             </div>
         </form>
     </FilterCard>

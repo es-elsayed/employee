@@ -4,7 +4,7 @@ import { Head, useForm } from '@inertiajs/vue3';
 import Container from '@/admin/Components/Container.vue';
 import Button from '@/admin/Components/Base/Button.vue';
 import Card from '@/admin/Components/Card/Card.vue';
-import FormInput from '@/admin/Components/Form/FormInput.vue';
+import InputGroup from '@/admin/Components/Form/InputGroup.vue';
 
 
 const props = defineProps({
@@ -56,7 +56,7 @@ const submit = () => {
             <Card>
                 <form @submit.prevent="submit" class="mt-6 space-y-6">
 
-                    <FormInput v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
+                    <InputGroup v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
 
                     <Button color="black" type="submit" :disabled="form.processing">
                         {{ form.processing ? 'Saving...' : 'Save' }}

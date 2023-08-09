@@ -1,9 +1,9 @@
 <script setup>
 import GuestLayout from '@/admin/Layouts/GuestLayout.vue';
-import InputError from '@/admin/Components/InputError.vue';
-import InputLabel from '@/admin/Components/InputLabel.vue';
+import Error from '@/admin/Components/Form/Error.vue';
+import Label from '@/admin/Components/Form/Label.vue';
 import Button from '@/admin/Components/Base/Button.vue';
-import TextInput from '@/admin/Components/TextInput.vue';
+import Input from '@/admin/Components/Form/Input.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
@@ -36,9 +36,9 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <Label for="email" value="Email" />
 
-                <TextInput
+                <Input
                     id="email"
                     type="email"
                     class="block w-full mt-1"
@@ -48,7 +48,7 @@ const submit = () => {
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <Error class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

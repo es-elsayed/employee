@@ -4,7 +4,7 @@ import { Head, useForm } from '@inertiajs/vue3';
 import Container from '@/admin/Components/Container.vue';
 import Button from '@/admin/Components/Base/Button.vue';
 import Card from '@/admin/Components/Card/Card.vue';
-import FormInput from '@/admin/Components/Form/FormInput.vue';
+import InputGroup from '@/admin/Components/Form/InputGroup.vue';
 import Permissions from './Permissions.vue';
 
 
@@ -34,11 +34,12 @@ const props = defineProps({
 
 const form = useForm({
     name: props.item.name ?? "",
+    guard_name: props.item.guard_name ?? "",
 });
 
 
 const submit = () => {
-    props.action  === 'create' ?
+    props.action === 'create' ?
         form.post(route(`admin.${props.routeResourceName}.store`)) :
         form.put(route(`admin.${props.routeResourceName}.update`, props.item.id));
 
@@ -60,7 +61,7 @@ const submit = () => {
             <Card>
                 <form @submit.prevent="submit" class="mt-6 space-y-6">
 
-                    <FormInput v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
+                    <InputGroup v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
 
                     <Button color="black" type="submit" :disabled="form.processing">
                         {{ form.processing ? 'Saving...' : 'Save' }}
@@ -69,6 +70,6 @@ const submit = () => {
                 </form>
             </Card>
         </Container>
-        <Permissions  v-if="action =='edit'" :role="item" :permissions="permissions"  />
+        <Permissions v-if="action == 'edit'" :role="item" :permissions="permissions" />
     </AuthenticatedLayout>
 </template>

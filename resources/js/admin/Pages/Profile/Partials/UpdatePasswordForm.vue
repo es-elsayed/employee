@@ -1,8 +1,8 @@
 <script setup>
-import InputError from '@/admin/Components/InputError.vue';
-import InputLabel from '@/admin/Components/InputLabel.vue';
+import Error from '@/admin/Components/Form/Error.vue';
+import Label from '@/admin/Components/Form/Label.vue';
 import Button from '@/admin/Components/Base/Button.vue';
-import TextInput from '@/admin/Components/TextInput.vue';
+import Input from '@/admin/Components/Form/Input.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -45,9 +45,9 @@ const updatePassword = () => {
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="current_password" value="Current Password" />
+                <Label for="current_password" value="Current Password" />
 
-                <TextInput
+                <Input
                     id="current_password"
                     ref="currentPasswordInput"
                     v-model="form.current_password"
@@ -56,13 +56,13 @@ const updatePassword = () => {
                     autocomplete="current-password"
                 />
 
-                <InputError :message="form.errors.current_password" class="mt-2" />
+                <Error :message="form.errors.current_password" class="mt-2" />
             </div>
 
             <div>
-                <InputLabel for="password" value="New Password" />
+                <Label for="password" value="New Password" />
 
-                <TextInput
+                <Input
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -71,13 +71,13 @@ const updatePassword = () => {
                     autocomplete="new-password"
                 />
 
-                <InputError :message="form.errors.password" class="mt-2" />
+                <Error :message="form.errors.password" class="mt-2" />
             </div>
 
             <div>
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <Label for="password_confirmation" value="Confirm Password" />
 
-                <TextInput
+                <Input
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
@@ -85,7 +85,7 @@ const updatePassword = () => {
                     autocomplete="new-password"
                 />
 
-                <InputError :message="form.errors.password_confirmation" class="mt-2" />
+                <Error :message="form.errors.password_confirmation" class="mt-2" />
             </div>
 
             <div class="flex items-center gap-4">
