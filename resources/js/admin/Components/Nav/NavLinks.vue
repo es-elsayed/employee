@@ -1,12 +1,13 @@
 <script setup>
-import NavLink from '@/admin/Components/Nav/NavLink.vue';
+import NavLink from './NavLink.vue';
 
 </script>
 <template>
     <!-- Navigation Links -->
-    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-        <NavLink v-for="menu in $page.props.menus" v-show="menu.isVisible" :href="menu.url" :active="menu.isActive">
+    <nav class="mt-10">
+        <NavLink v-for="menu in $page.props.menus" v-show="menu.isVisible" :href="menu.url" :active="menu.isActive"
+            :key="menu.label">
             {{ menu.label }}
         </NavLink>
-    </div>
+    </nav>
 </template>

@@ -68,7 +68,7 @@ const { filters } = useFilter({
                 <BasicFilter v-model="filters" />
                 <Table :headers="headers" :items="items">
                     <template v-slot="{ item }">
-                        <Td v-for="header in headers">
+                        <Td v-for="header in headers" :key="header.data">
                             <div v-if="header.data !== 'actions'">
                                 {{ item[header.data] }}
                             </div>

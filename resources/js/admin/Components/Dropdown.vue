@@ -25,52 +25,40 @@ const closeOnEscape = (e) => {
 onMounted(() => document.addEventListener('keydown', closeOnEscape));
 onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 
-const widthClass = computed(() => {
-    return {
-        48: 'w-48',
-    }[props.width.toString()];
-});
+// const widthClass = computed(() => {
+//     return {
+//         48: 'w-48',
+//     }[props.width.toString()];
+// });
 
-const alignmentClasses = computed(() => {
-    if (props.align === 'left') {
-        return 'origin-top-left left-0';
-    } else if (props.align === 'right') {
-        return 'origin-top-right right-0';
-    } else {
-        return 'origin-top';
-    }
-});
+// const alignmentClasses = computed(() => {
+//     if (props.align === 'left') {
+//         return 'origin-top-left left-0';
+//     } else if (props.align === 'right') {
+//         return 'origin-top-right right-0';
+//     } else {
+//         return 'origin-top';
+//     }
+// });
 
-const open = ref(false);
+const dropdownOpen = ref(false);
+
 </script>
 
 <template>
     <div class="relative">
-        <div @click="open = !open">
+        <button class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
+            @click="dropdownOpen = !dropdownOpen">
             <slot name="trigger" />
-        </div>
+        </button>
 
-        <!-- Full Screen Dropdown Overlay -->
-        <div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
+        <div v-show="dropdownOpen" class="fixed inset-0 z-10 w-full h-full" @click="dropdownOpen = false" />
 
-        <transition
-            enter-active-class="transition ease-out duration-200"
-            enter-from-class="transform opacity-0 scale-95"
-            enter-to-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-from-class="transform opacity-100 scale-100"
-            leave-to-class="transform opacity-0 scale-95"
-        >
-            <div
-                v-show="open"
-                class="absolute z-50 mt-2 rounded-md shadow-lg"
-                :class="[widthClass, alignmentClasses]"
-                style="display: none"
-                @click="open = false"
-            >
-                <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
-                    <slot name="content" />
-                </div>
+        <transition enter-active-class="transition duration-150 ease-out transform" enter-from-class="scale-95 opacity-0"
+            enter-to-class="scale-100 opacity-100" leave-active-class="transition duration-150 ease-in transform"
+            leave-from-class="scale-100 opacity-100" leave-to-class="scale-95 opacity-0">
+            <div v-show="dropdownOpen" class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
+                <slot name="content" />
             </div>
         </transition>
     </div>
