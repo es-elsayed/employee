@@ -60,7 +60,7 @@ const submit = () => {
             </h2>
         </template>
 
-        <Container>
+
             <Card>
                 <form @submit.prevent="submit" class="mt-6 space-y-6">
                     <div class="grid grid-cols-2 gap-6">
@@ -87,6 +87,6 @@ const submit = () => {
 
                 </form>
             </Card>
-        </Container>
+
     </AuthenticatedLayout>
 </template>

@@ -1,22 +1,22 @@
 <script setup>
 import AuthenticatedLayout from '@/admin/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import Container from '@/admin/Components/Container.vue';
 import Card from '@/admin/Components/Card/Card.vue';
+
+const title = 'Dashboard';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head :title="title" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :title="title">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">Dashboard</h2>
         </template>
 
-        <Container>
-            <Card>
-                    You're logged in!
-            </Card>
-        </Container>
+        <Card>
+            You're logged in!
+        </Card>
+
     </AuthenticatedLayout>
 </template>

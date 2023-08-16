@@ -63,7 +63,7 @@ const { filters } = useFilter({
             <Button v-if="can.create" color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
         </template>
 
-        <Container>
+
             <Card class="mt-4">
                 <BasicFilter v-model="filters" />
                 <Table :headers="headers" :items="items">
@@ -95,6 +95,6 @@ const { filters } = useFilter({
                     </template>
                 </Modal>
             </Card>
-        </Container>
+
     </AuthenticatedLayout>
 </template>

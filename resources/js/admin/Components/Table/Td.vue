@@ -1,6 +1,5 @@
 <template>
-    <!-- <div class="overflow-x-auto "> -->
-    <td class="px-6 py-4 whitespace-nowrap">
+    <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
         <slot />
 
     </td>

@@ -52,18 +52,16 @@ const submit = () => {
             </h2>
         </template>
 
-        <Container>
-            <Card>
-                <form @submit.prevent="submit" class="mt-6 space-y-6">
+        <Card>
+            <form @submit.prevent="submit" class="mt-6 space-y-6">
 
-                    <InputGroup v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
+                <InputGroup v-model="form.name" id="name" required label="Name" :error-message="form.errors.name" />
 
-                    <Button color="black" type="submit" :disabled="form.processing">
-                        {{ form.processing ? 'Saving...' : 'Save' }}
-                    </Button>
+                <Button color="black" type="submit" :disabled="form.processing">
+                    {{ form.processing ? 'Saving...' : 'Save' }}
+                </Button>
 
-                </form>
-            </Card>
-        </Container>
+            </form>
+        </Card>
     </AuthenticatedLayout>
 </template>

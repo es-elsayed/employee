@@ -55,7 +55,7 @@ const transformText = (text) => {
 </script>
 
 <template>
-    <Container>
+
         <Card>
             <template #header>
                 Permissions
@@ -79,5 +79,5 @@ const transformText = (text) => {
                 </li>
             </ul>
         </Card>
-    </Container>
+
 </template>
