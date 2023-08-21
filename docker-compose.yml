@@ -1,12 +1,12 @@
 version: '3'
 services:
-    e-commerce:
+    employee:
         build:
             context: ./docker/8.2
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: e-commerce-image
+        image: employee-image
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -21,7 +21,7 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - e-commerce
+            - employee
         depends_on:
             - mysql
             - redis
@@ -41,7 +41,7 @@ services:
             - 'sail-mysql:/var/lib/mysql'
             - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
-            - e-commerce
+            - employee
         healthcheck:
             test:
                 - CMD
@@ -61,7 +61,7 @@ services:
         depends_on:
             - mysql
         networks:
-            - e-commerce
+            - employee
 
     redis:
         image: 'redis:alpine'
@@ -70,7 +70,7 @@ services:
         volumes:
             - 'sail-redis:/data'
         networks:
-            - e-commerce
+            - employee
         healthcheck:
             test:
                 - CMD
@@ -80,7 +80,7 @@ services:
             timeout: 5s
 
 networks:
-    e-commerce:
+    employee:
         driver: bridge
 volumes:
     sail-mysql:

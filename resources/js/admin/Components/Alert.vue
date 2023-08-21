@@ -42,6 +42,6 @@ const clearMessage = (messageType) => {
 </script>
 
 <template>
-    <div v-if="message" :class="`fixed top-0 right-0 z-10 px-4 py-2 mt-4 mr-4 text-white rounded  ${color}`"
+    <div v-if="message" :class="`fixed bottom-10 right-5 z-10 px-4 py-2 mt-4 mr-4 text-white rounded  ${color}`"
         @click="clearMessage">{{ message }}</div>
 </template>

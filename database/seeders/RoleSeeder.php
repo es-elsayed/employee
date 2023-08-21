@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
     private function roles(): array
     {
 
-        return ['super-admin', 'editor', 'user', 'guest'];
+        return ['super-admin', 'manager', 'employee'];
 
     }
 }

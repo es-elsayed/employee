@@ -3,7 +3,7 @@ namespace App\Services;
 
 class Menu
 {
-    static function nav()
+    public static function nav()
     {
         return [
             [
@@ -30,18 +30,12 @@ class Menu
                 'isActive' => request()->routeIs('admin.users.*'),
                 'isVisible' => request()->user()?->can('users-read'),
             ],
-            // [
-            //     'label' => 'Categories',
-            //     'url' => route('admin.categories.index'),
-            //     'isActive' => request()->routeIs('admin.categories.*'),
-            //     'isVisible' => request()->user()?->can('categories-read'),
-            // ],
-            // [
-            //     'label' => 'Products',
-            //     'url' => route('admin.products.index'),
-            //     'isActive' => request()->routeIs('admin.products.*'),
-            //     'isVisible' => request()->user()?->can('products-read'),
-            // ],
+            [
+                'label' => 'Department',
+                'url' => route('admin.departments.index'),
+                'isActive' => request()->routeIs('admin.departments.*'),
+                'isVisible' => request()->user()?->can('departments-read'),
+            ],
         ];
     }
 }

@@ -14,7 +14,7 @@ defineProps({
 })
 </script>
 <template>
-    <table class="min-w-full">
+    <table class="min-w-full mt-6">
 
         <thead>
             <Th v-for="header in headers" :key="header.lable">{{ header.label }}</Th>
