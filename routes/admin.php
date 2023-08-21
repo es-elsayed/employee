@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionRoleController;
 use App\Http\Controllers\Admin\RoleController;
@@ -26,4 +27,5 @@ Route::group(['middleware' => 'verified'], function () {
     Route::resource('permissions', PermissionController::class);
     Route::resource('users', UserController::class);
     Route::resource('departments', DepartmentController::class);
+    Route::resource('employees', EmployeeController::class);
 });

@@ -36,6 +36,12 @@ class Menu
                 'isActive' => request()->routeIs('admin.departments.*'),
                 'isVisible' => request()->user()?->can('departments-read'),
             ],
+            [
+                'label' => 'Employee',
+                'url' => route('admin.employees.index'),
+                'isActive' => request()->routeIs('admin.employees.*'),
+                'isVisible' => request()->user()?->can('employees-read'),
+            ],
         ];
     }
 }
