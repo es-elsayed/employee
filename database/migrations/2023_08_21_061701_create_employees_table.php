@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->decimal('salary', 10, 2);
             $table->string('image')->nullable();
-            $table->foreignId('manager_id')->nullable()->constrained('employees')->onDelete('cascade');
+            $table->foreignId('manager_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('department_id')->nullable()->constrained('departments')->onDelete('cascade');
             $table->timestamps();
         });

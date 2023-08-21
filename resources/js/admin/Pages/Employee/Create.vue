@@ -78,11 +78,12 @@ const submit = () => {
                 <InputGroup v-model="form.email" id="email" type="email" required label="Email"
                     :error-message="form.errors.email" />
 
-                <InputGroup v-model="form.password" id="password" type="password"  :required="action == 'create'" label="Password"
-                    :error-message="form.errors.password" />
+                <InputGroup v-model="form.password" id="password" type="password" :required="action == 'create'"
+                    label="Password" :error-message="form.errors.password" />
 
-                <InputGroup v-model="form.password_confirmation" id="password_confirmation" type="password"  :required="action == 'create'"
-                    label="Confirm Password" :error-message="form.errors.password_confirmation" />
+                <InputGroup v-model="form.password_confirmation" id="password_confirmation" type="password"
+                    :required="action == 'create'" label="Confirm Password"
+                    :error-message="form.errors.password_confirmation" />
 
                 <InputGroup v-model="form.salary" id="salary" type="number" required label="Salary"
                     :error-message="form.errors.salary" />
@@ -96,7 +97,7 @@ const submit = () => {
                 <SelectGroup label="Department" v-model="form.department_id" item-text="name" :items="departments"
                     :error-message="form.errors.department_id" required />
 
-                <SelectGroup label="Manager" v-model="form.manager_id" item-text="full_name" :items="managers"
+                <SelectGroup label="Manager" v-model="form.manager_id" :items="managers"
                     :error-message="form.errors.manager_id" required />
 
                 <Button color="black" type="submit" :disabled="form.processing">

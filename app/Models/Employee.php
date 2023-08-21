@@ -13,11 +13,6 @@ class Employee extends Model
 {
     use HasFactory, FilterableTrait;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -42,13 +37,9 @@ class Employee extends Model
 
     public function manager(): BelongsTo
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function employees(): HasMany
-    {
-        return $this->hasMany(Employee::class, 'manager_id');
-    }
     public function fullName(): Attribute
     {
         return new Attribute(

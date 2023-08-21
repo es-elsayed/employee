@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EmployeeRequest;
 use App\Http\Resources\DepartmentResource;
 use App\Http\Resources\EmployeeResource;
+use App\Http\Resources\UserResource;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\User;
 use App\Services\EmployeeService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -65,7 +67,7 @@ class EmployeeController extends Controller
         return Inertia::render('Employee/Create', [
             'action' => 'create',
             'routeResourceName' => $this->routeResourceName,
-            'managers' => EmployeeResource::collection(Employee::get(['id', 'first_name', 'last_name'])),
+            'managers' => UserResource::collection(User::get(['id', 'name'])),
             'departments' => DepartmentResource::collection(Department::get(['id', 'name'])),
         ]);
     }
@@ -84,7 +86,7 @@ class EmployeeController extends Controller
             'item' => new EmployeeResource($employee),
             'action' => 'edit',
             'routeResourceName' => $this->routeResourceName,
-            'managers' => EmployeeResource::collection(Employee::get(['id', 'first_name', 'last_name'])),
+            'managers' => UserResource::collection(User::get(['id', 'name'])),
             'departments' => DepartmentResource::collection(Department::get(['id', 'name'])),
         ]);
     }

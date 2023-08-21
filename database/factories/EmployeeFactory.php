@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,10 +32,8 @@ class EmployeeFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Employee $employee) {
-            if ($employee->manager_id == null) {
-                Employee::factory()
-                    ->count(3) // Create 3 child categories for each parent
-                    ->create(['manager_id' => $employee->id]);}
+            $employee->manager_id = User::inRandomOrder()->first()->id;
+            $employee->save();
         });
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -36,7 +37,7 @@ class EmployeeRequest extends FormRequest
             'salary' => ['required', 'numeric'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'department_id' => ['required', Rule::exists(Department::class, 'id')],
-            'manager_id' => ['required', Rule::exists(Employee::class, 'id')],
+            'manager_id' => ['required', Rule::exists(User::class, 'id')],
         ];
 
         if ($this->input('password') === null) {
