@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 
 class Employee extends Model
 {
-    use HasFactory, FilterableTrait;
+    use HasFactory, FilterableTrait, HasRoles;
 
     protected $fillable = [
         'first_name',
@@ -30,6 +31,13 @@ class Employee extends Model
         'password' => 'hashed',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function (Employee $employee) {
+            $employee->assignRole('employee');
+        });
+    }
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
@@ -38,6 +46,11 @@ class Employee extends Model
     public function manager(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
     }
 
     public function fullName(): Attribute

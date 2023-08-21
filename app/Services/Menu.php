@@ -42,6 +42,12 @@ class Menu
                 'isActive' => request()->routeIs('admin.employees.*'),
                 'isVisible' => request()->user()?->can('employees-read'),
             ],
+            [
+                'label' => 'Task',
+                'url' => route('admin.tasks.index'),
+                'isActive' => request()->routeIs('admin.tasks.*'),
+                'isVisible' => request()->user()?->can('tasks-read'),
+            ],
         ];
     }
 }

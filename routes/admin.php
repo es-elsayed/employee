@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CompleteTaskController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionRoleController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +30,6 @@ Route::group(['middleware' => 'verified'], function () {
     Route::resource('users', UserController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('employees', EmployeeController::class);
+    Route::put('tasks/{task}/complete', CompleteTaskController::class)->middleware('can:tasks-update')->name('tasks.complete');
+    Route::resource('tasks', TaskController::class);
 });
