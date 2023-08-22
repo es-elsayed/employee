@@ -25,6 +25,8 @@ class EmployeeService
     {
         $employee = Employee::create($employeeRequest->validated());
 
+        $employee->assignRole('employee');
+        
         if ($employeeRequest->hasFile('image')) {
             self::uploadImage($employee, $employeeRequest->file('image'));
         }

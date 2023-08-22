@@ -17,9 +17,6 @@ class RolesPermissionsSeeder extends Seeder
             Permission::findByName($permission)->assignRole('manager');
         }
 
-        foreach ($this->employeePermissions() as $permission) {
-            Permission::findByName($permission)->assignRole('employee');
-        }
     }
 
     private function managerPermissions(): array
@@ -44,11 +41,11 @@ class RolesPermissionsSeeder extends Seeder
         ];
     }
 
-    private function employeePermissions(): array
-    {
-        return [
-            'tasks-read',
-            'tasks-update',
-        ];
-    }
+    // private function employeePermissions(): array
+    // {
+    //     return [
+    //         'tasks-read',
+    //         'tasks-update',
+    //     ];
+    // }
 }

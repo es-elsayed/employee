@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('employee.login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -65,20 +65,18 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link :href="route('employee.login')"
-                    class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Login As Employee
-                </Link>
-                <span>&#160; or &#160;</span>
-                <Link :href="route('register')"
-                    class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Register?
-                </Link>
 
-                <Button color="black" type="submit" class="ml-4" :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing">
-                    Log in
-                </Button>
+                <div class="flex items-center justify-end mt-4">
+                    <Link :href="route('login')"
+                        class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Login As Manager
+                    </Link>
+
+                    <Button color="black" type="submit" class="ml-4" :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing">
+                        Log in
+                    </Button>
+                </div>
             </div>
         </form>
     </GuestLayout>

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::group(['middleware' => 'verified'], function () {
+Route::prefix('')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::resource('roles', RoleController::class);
     Route::post('permissions/{permission}/role', PermissionRoleController::class)->name('roles.permission')->middleware("can:roles-update");

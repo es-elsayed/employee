@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -18,12 +19,16 @@ class RoleSeeder extends Seeder
                 'name' => $role,
             ]);
         }
+        $role = Role::create(['guard_name' => 'employee', 'name' => 'employee']);
+
+        Permission::findOrCreate('tasks-update', 'employee');
+        Permission::findOrCreate('tasks-read', 'employee');
     }
 
     private function roles(): array
     {
 
-        return ['super-admin', 'manager', 'employee'];
+        return ['super-admin', 'manager'];
 
     }
 }

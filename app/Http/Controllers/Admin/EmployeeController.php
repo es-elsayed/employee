@@ -76,6 +76,8 @@ class EmployeeController extends Controller
     {
         $employee = EmployeeService::create($request);
 
+        $employee->assignRole('employee');
+
         return to_route('admin.employees.edit', $employee->id)->with('success', 'Employee Created Successfully');
     }
     public function edit(Employee $employee)

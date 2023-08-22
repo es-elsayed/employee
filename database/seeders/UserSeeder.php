@@ -17,8 +17,7 @@ class UserSeeder extends Seeder
 
         User::factory()->times(10)->create()->each(function ($user) {
             // Assign a role to each user here
-            $role = Role::inRandomOrder()->first(); // You can customize how the roles are assigned (e.g., inRandomOrder(), first(), etc.)
-            $user->assignRole($role->name); // Assuming you have a method like assignRole() in your User model to assign roles.
+            $user->assignRole('manager'); // Assuming you have a method like assignRole() in your User model to assign roles.
         });
 
     }
