@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\TaskResource;
+use App\Http\Requests\Admin\TaskRequest;
+use App\Http\Resources\EmployeeResource;
+use App\Http\Resources\EmployeeTaskResource;
+use App\Models\Employee;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class DashboardController extends Controller
+class TaskController extends Controller
 {
     private string $routeResourceName = 'tasks';
 
     public function __construct()
     {
-        // $this->middleware("can:$this->routeResourceName-read");
-        // $this->middleware("can:$this->routeResourceName-update");
+        $this->middleware("role:employee");
+        $this->middleware("role:employee");
     }
 
     public function index(Request $request)
@@ -27,9 +30,9 @@ class DashboardController extends Controller
             ->latest('id')
             ->paginate(10);
 
-        return Inertia::render('EmployeeDashboard', [
+        return Inertia::render('Employee/Task/Index', [
             'title' => 'Tasks',
-            'items' => TaskResource::collection($task),
+            'items' => EmployeeTaskResource::collection($task),
             'headers' => [
                 [
                     'label' => '#',
@@ -51,14 +54,31 @@ class DashboardController extends Controller
                     'label' => 'Created At',
                     'data' => 'created_at',
                 ],
+                [
+                    'label' => 'Actions',
+                    'data' => 'actions',
+                ],
             ],
             'routeResourceName' => $this->routeResourceName,
             'filters' => (object) $request->all(),
             'can' => [
-                'create' => $request->user()->can('tasks-create'),
+                'create' => $request->user()->hasRole('employee'),
             ],
         ]);
 
     }
+    public function edit(Task $task)
+    {
+        return Inertia::render('Employee/Task/Edit', [
+            'item' => new EmployeeTaskResource($task),
+            'action' => 'edit',
+            'routeResourceName' => $this->routeResourceName,
+        ]);
+    }
 
+    public function update(TaskRequest $request, Task $task)
+    {
+        $task->update($request->validated());
+        return to_route('employee.tasks.index')->with('success', 'Task Updated Successfully');
+    }
 }

@@ -39,7 +39,7 @@ class LoginController extends Controller
         if (Auth::guard('employee')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('employee.dashboard');
+            return redirect()->route('employee.tasks');
         }
 
         return back()->withErrors([

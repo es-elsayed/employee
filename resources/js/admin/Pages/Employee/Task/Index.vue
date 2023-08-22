@@ -58,6 +58,8 @@ const complete = (item) => {
     console.log(item, item.id);
     completeForm.put(route(`employee.${props.routeResourceName}.complete`, item.id));
 };
+
+console.log('hererere');
 </script>
 
 <template>
@@ -86,27 +88,12 @@ const complete = (item) => {
                     </Td>
                     <Td>{{ item.created_at }}</Td>
                     <Td>
-                        <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)" :show-edit="item.can.update"
-                            :show-delete="item.can.delete" @deleteClicked="showDeleteModal(item)" />
+                        <Actions :edit-link="route(`employee.${routeResourceName}.edit`, item.id)" :show-edit="item.can.update" :show-delete="item.can.delete"
+                            />
                     </Td>
                 </template>
             </Table>
 
-            <Modal :show="deleteModal" @close="closeModal" :title="`Delete: (${itemToDelete.name})`">
-
-                <template #description>
-                    Once you are delete, you un-able to restore it again.
-                </template>
-
-                <template #footer>
-                    <Button color="white" @click="closeModal"> Cancel </Button>
-
-                    <Button color="red" class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                        @click="handleDeleteItem">
-                        Delete
-                    </Button>
-                </template>
-            </Modal>
         </Card>
 
     </AuthenticatedLayoutEmployee>

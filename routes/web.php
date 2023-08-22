@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\CompleteTaskController;
 use App\Http\Controllers\Auth\Employee\LoginController;
-use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\Employee\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +31,7 @@ Route::prefix('employee')
         });
 
         Route::middleware('auth:employee')->group(function () {
-            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::resource('tasks', TaskController::class)->only(['index','edit', 'update']);
             Route::put('tasks/{task}/complete', CompleteTaskController::class)->middleware('role:employee')->name('tasks.complete');
 
             Route::post('logout', [LoginController::class, 'destroy'])
